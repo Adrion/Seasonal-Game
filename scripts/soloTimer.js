@@ -1,7 +1,8 @@
 $(document).ready(function () {
   'use strict';
   var zindex = 50,
-    score = 0;
+    score;
+
   // Create your interaction code here
   $("#pinboard div.actif").each(function () {
     // console.log($(window).height());
@@ -48,6 +49,7 @@ $(document).ready(function () {
   });
 
   $("#spring").droppable({
+    accept: ".1",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
@@ -55,6 +57,7 @@ $(document).ready(function () {
   });
 
   $("#summer").droppable({
+    accept: ".2",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
@@ -62,6 +65,7 @@ $(document).ready(function () {
   });
 
   $("#autumn").droppable({
+    accept: ".3",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
@@ -69,11 +73,15 @@ $(document).ready(function () {
   });
 
   $("#winter").droppable({
+    accept: ".4",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
     }
   });
+
+  //Init Chrono
+  chronoStart();
 
   function checkStillDiv() {
     if (!$('#pinboard div.actif')[0]) {
@@ -83,69 +91,72 @@ $(document).ready(function () {
   }
 
   function endGame() {
+    chronoStop();
+    score = $("#score").html();
     $("#pinboard").html($('#game-over-template').html());
     $("#finalScore").html(score);
     $(document).on('click', '#btnRestartGame', function () {
-      $("#pinboard").html($('#solo-game-template').html());
+      $("#pinboard").html($('#soloTime-game-template').html());
     });
   }
 
-  //-----------------CHRONO-------------------
-
-  var startTime = 0,
-    start = 0,
-    end = 0,
-    diff = 0,
-    timerID = 0;
-
-  function chrono() {
-    end = new Date();
-    diff = end - start;
-    diff = new Date(diff);
-    var msec = diff.getMilliseconds(),
-      sec = diff.getSeconds(),
-      min = diff.getMinutes(),
-      hr = diff.getHours() - 1;
-    if (min < 10) {
-      min = "0" + min;
-    }
-    if (sec < 10) {
-      sec = "0" + sec;
-    }
-    if (msec < 10) {
-      msec = "00" + msec;
-    } else if (msec < 100) {
-      msec = "0" + msec;
-    }
-    $("#chronotime").innerHTML = hr + ":" + min + ":" + sec + ":" + msec;
-    timerID = setTimeout("chrono()", 10);
-  }
-
-  function chronoStart() {
-    start = new Date();
-    chrono();
-  }
-
-  function chronoContinue() {
-    start = new Date() - diff;
-    start = new Date(start);
-    chrono();
-  }
-
-  function chronoReset() {
-    document.getElementById("chronotime").innerHTML = "0:00:00:000";
-    start = new Date();
-  }
-
-  function chronoStopReset() {
-    document.getElementById("chronotime").innerHTML = "0:00:00:000";
-    document.chronoForm.startstop.onclick = chronoStart;
-  }
-
-  function chronoStop() {
-    clearTimeout(timerID);
-  }
-
-  //-----------------END CHRONO----------------
-
 });
+
+/*jshint strict:false */
+
+var startTime = 0,
+  start,
+  end = 0,
+  diff = 0,
+  timerID = 0;
+
+function chrono() {
+  end = new Date();
+  diff = end - start;
+  diff = new Date(diff);
+  var msec = diff.getMilliseconds(),
+    sec = diff.getSeconds(),
+    min = diff.getMinutes(),
+    hr = diff.getHours() - 1;
+  if (min < 10) {
+    min = "0" + min;
+  }
+  if (sec < 10) {
+    sec = "0" + sec;
+  }
+  if (msec < 10) {
+    msec = "00" + msec;
+  } else if (msec < 100) {
+    msec = "0" + msec;
+  }
+  //console.log(hr, min, sec, msec);
+  $("#score").html(hr + ":" + min + ":" + sec + ":" + msec);
+  timerID = setTimeout("chrono()", 10);
+}
+
+function chronoStart() {
+  start = new Date();
+  chrono();
+}
+
+function chronoContinue() {
+  start = new Date() - diff;
+  start = new Date(start);
+  chrono();
+}
+
+function chronoReset() {
+  document.getElementById("score").innerHTML = "0:00:00:000";
+  start = new Date();
+}
+
+function chronoStopReset() {
+  document.getElementById("score").innerHTML = "0:00:00:000";
+  document.chronoForm.startstop.onclick = chronoStart;
+}
+
+function chronoStop() {
+  clearTimeout(timerID);
+}
+
+//-----------------END CHRONO----------------
