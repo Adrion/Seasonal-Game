@@ -2,13 +2,10 @@ $(document).ready(function () {
   'use strict';
   var zindex = 50,
     score;
-
   // Create your interaction code here
   $("#pinboard div.actif").each(function () {
     // console.log($(window).height());
     // console.log($(document).height());
-    console.log($("#pinboard ul li").width());
-    console.log($("#pinboard").width());
     var xpos = Math.floor(Math.random()),
       ypos = Math.floor(Math.random()),
       rotation = Math.floor(Math.random() * 15);
@@ -26,6 +23,7 @@ $(document).ready(function () {
       transform: "rotate(" + rotation + "deg)"
     });
   }).draggable({
+
     start: function () {
       zindex = zindex + 1;
       $(this).css({
@@ -45,7 +43,9 @@ $(document).ready(function () {
         transform: "rotate(" + rotation + "deg)"
       });
     },
-    containment: "#pinboard"
+
+    containment: "#pinboard",
+    scroll: false
   });
 
   $("#spring").droppable({
