@@ -9,17 +9,19 @@
 		<script src="scripts/js/jquery-ui-1.10.2.custom.js"></script>
         <script src="scripts/js/jquery-ui.js"></script>
 		<script type="text/javascript">
-			$(document).ready(function($){
+			$(document).ready(function ($) {
+				'use strict';
 				$("#pinboard").html($('#menu-template').html());
 
-				$(document).on('click','#btnSoloGame',function(){
+				$(document).on('click', '#btnSoloGame', function () {
 					$("#pinboard").html($('#solo-game-template').html());
 				});
-				$(document).on('click','#btnSoloSpeedGame',function(){
+
+				$(document).on('click', '#btnSoloSpeedGame', function () {
 					$("#pinboard").html($('#soloTime-game-template').html());
 				});
 
-				$(document).on('click', '#btnMenu', function() {
+				$(document).on('click', '#btnMenu', function () {
 					$("#pinboard").html($('#menu-template').html());
 				});
 			});
