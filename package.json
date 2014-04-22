@@ -1,0 +1,13 @@
+{
+  "author": "Cedric Frossard (Adrion) adrion.dev@gmail.com",
+  "name": "SeasonalGame",
+  "description": "Multiplayer & crossplatform Quizz game",
+  "version": "0.0.1",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "socket.io": "= 0.7.9"
+  },
+  "devDependencies": {}
+}

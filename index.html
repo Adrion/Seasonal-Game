@@ -24,12 +24,43 @@
 				$(document).on('click', '#btnMenu', function () {
 					$("#pinboard").html($('#menu-template').html());
 				});
+
+				$(document).on('click', '#btnDuelGame', function () {
+					$("#pinboard").html($('#solo-game-template').html());
+					// On demande le pseudo de l'utilisateur
+					var pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
+					$('#score').prepend("<div class='pseudo'>" + pseudo + "</div>")
+					// On se connecte au serveur
+					//socket = io.connect();
+					
+					// On previent l'adversaires.
+					//socket.emit('register', pseudo);
+					
+					// On recupere le nom de l'adversaires (si il est deja connecté)
+					//socket.on('getUsers', function(){
+						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
+						$('#scoreOpponent').prepend('<div class="pseudo" id="scoreOpponent">adversaires</div>');
+					//});
+
+					//on ecoute l'arrivé d'un autre joueur.
+					//socket.on('userConnected', function () {
+						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
+					//});
+
+					//on ecoute les actions de l'adversaires (refreshScore)
+						//socket.on('refreshScore', function (users) {
+							
+						//});
+					//
+				});
 			});
 		</script>
 	</head>
 	<body>
 		<script id="solo-game-template" type="text/template">
-			<div id="score">0</div>
+			<div id="scores">
+				<div class="score" id="score">0</div>
+            </div>
             <table>
                 <tr>
                     <td id="spring"><p>1</p></td>
@@ -63,7 +94,9 @@
 				<script src="scripts/points.js"></script>
 				</script>
 		<script id="soloTime-game-template" type="text/template">
-			<div id="score">0:00:00:00</div>
+			<div id="scores">
+				<div id="score">0:00:00:00</div>
+            </div>
             <table>
                 <tr>
                     <td id="spring"><p>1</p></td>
@@ -105,7 +138,7 @@
 			<div class="buttons">
                 <button id="btnSoloGame" class="btn right">Points</button>
                 <button id="btnSoloSpeedGame" class="btn right">Time</button>
-                <div style="clear:both"></div>
+                <button id="btnDuelGame" class="btn right">Duel</button>
             </div>
         </script>
 		
