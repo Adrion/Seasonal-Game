@@ -1,0 +1,51 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    cursor: default;
+    user-select:none;
+}
+h1{
+    color: red;
+}
+td{
+    width: 50%;
+    height: 50%;
+    text-align:center;
+    font-size: 6em;
+}
+table{
+    width: 100%;
+    height: 100%;
+    border-spacing:0;
+}
+
+#spring{
+    background-color: #4cff00;
+}
+#summer{
+    background-color: #f3f528;
+}
+#autumn{
+    background-color: #986618;
+}
+#winter{
+    background-color: #fff;
+}
+
+#drag{
+    width: 25%;
+    height: 25%;
+    position: absolute;
+    left: 37%;
+    top: 37%;
+    background-color: #48cfee;
+    text-align: center;
+}
+
+#score{
+    position: absolute;
+    top: 0;
+    right:0;
+}

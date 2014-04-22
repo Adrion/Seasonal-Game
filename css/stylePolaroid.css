@@ -1,0 +1,64 @@
+﻿	body {
+		background:		transparent url(corkboard.jpg) repeat top left;		
+	}
+	
+	#pinboard {
+		width:			100%;
+		height:			100%;
+		position:		relative;	
+		margin:			auto;
+	}
+	
+	
+	
+	#pinboard div.actif {
+		position:		absolute;
+		top:			0;
+		left:			0;
+		display:		block;
+		margin:			0;
+		padding:		0;
+		list-style:		none;
+		background:		#fefefe;
+		width:			200px;
+		height:			200px;
+		/*padding:		20px 20px 40px 20px;*/
+		/*box-shadow*/
+		-webkit-box-shadow:		0px 0px 5px #000;
+		-moz-box-shadow:		0px 0px 5px #000;
+		-o-box-shadow:			0px 0px 5px #000;
+		-ms-box-shadow:			0px 0px 5px #000;
+		box-shadow:		0px 0px 5px #000;
+		/*transition*/
+		-webkit-transition:		0.2s -webkit-transform linear;
+		-moz-transition:		0.2s -moz-transform linear;
+		-ms-transition:			0.2s -ms-transform linear;
+		-o-transition:			0.2s -o-transform linear;
+		transition:		0.2s transform linear;
+	}
+	
+	#pinboard div img {
+		border:			1px solid #ccc;
+	}
+	
+	#pinboard div span {
+		position:		absolute;
+		bottom:			15px;
+		left:			20px;
+		font-size:1em;
+		margin-right:4px;
+	}
+	
+	.ui-draggable-dragging {
+		-webkit-transform:		rotate(0deg) scale(1.2) !important;
+		-moz-transform: 		rotate(0deg) scale(1.2) !important;	
+		-ms-transform: 			rotate(0deg) scale(1.2) !important;	
+		-o-transform: 			rotate(0deg) scale(1.2) !important;	
+		transform:		rotate(0deg) scale(1.2) !important;
+		/*box-shadow*/
+		-webkit-box-shadow:		0px 0px 10px #000 !important;
+		-moz-box-shadow:		0px 0px 10px #000 !important;
+		-o-box-shadow:			0px 0px 10px #000 !important;
+		-ms-box-shadow:			0px 0px 10px #000 !important;
+		box-shadow:		0px 0px 10px #000 !important;
+	}
