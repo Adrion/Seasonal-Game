@@ -1,60 +1,14 @@
-﻿<!DOCTYPE HTML>
-<html>
+﻿<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>CSS3 Polaroid Slideshow</title>
 		<link rel="stylesheet" href="css/stylePolaroid.css"/>
         <link rel="stylesheet" href="css/styles.css"/>
+        <script src="/socket.io/socket.io.js"></script>
 		<script src="scripts/js/jquery-1.9.1.js"></script>
 		<script src="scripts/js/jquery-ui-1.10.2.custom.js"></script>
         <script src="scripts/js/jquery-ui.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function ($) {
-				'use strict';
-				$("#pinboard").html($('#menu-template').html());
-
-				$(document).on('click', '#btnSoloGame', function () {
-					$("#pinboard").html($('#solo-game-template').html());
-				});
-
-				$(document).on('click', '#btnSoloSpeedGame', function () {
-					$("#pinboard").html($('#soloTime-game-template').html());
-				});
-
-				$(document).on('click', '#btnMenu', function () {
-					$("#pinboard").html($('#menu-template').html());
-				});
-
-				$(document).on('click', '#btnDuelGame', function () {
-					$("#pinboard").html($('#solo-game-template').html());
-					// On demande le pseudo de l'utilisateur
-					var pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
-					$('#score').prepend("<div class='pseudo'>" + pseudo + "</div>")
-					// On se connecte au serveur
-					//socket = io.connect();
-					
-					// On previent l'adversaires.
-					//socket.emit('register', pseudo);
-					
-					// On recupere le nom de l'adversaires (si il est deja connecté)
-					//socket.on('getUsers', function(){
-						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
-						$('#scoreOpponent').prepend('<div class="pseudo" id="scoreOpponent">adversaires</div>');
-					//});
-
-					//on ecoute l'arrivé d'un autre joueur.
-					//socket.on('userConnected', function () {
-						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
-					//});
-
-					//on ecoute les actions de l'adversaires (refreshScore)
-						//socket.on('refreshScore', function (users) {
-							
-						//});
-					//
-				});
-			});
-		</script>
+		
 	</head>
 	<body>
 		<script id="solo-game-template" type="text/template">
@@ -141,6 +95,53 @@
                 <button id="btnDuelGame" class="btn right">Duel</button>
             </div>
         </script>
+
+        <script type="text/javascript">
+			$(document).ready(function ($) {
+				'use strict';
+				$("#pinboard").html($('#menu-template').html());
+
+				$(document).on('click', '#btnSoloGame', function () {
+					$("#pinboard").html($('#solo-game-template').html());
+				});
+
+				$(document).on('click', '#btnSoloSpeedGame', function () {
+					$("#pinboard").html($('#soloTime-game-template').html());
+				});
+
+				$(document).on('click', '#btnMenu', function () {
+					$("#pinboard").html($('#menu-template').html());
+				});
+
+				$(document).on('click', '#btnDuelGame', function () {
+					$("#pinboard").html($('#solo-game-template').html());
+					// On demande le pseudo de l'utilisateur
+					var pseudo = prompt('Votre pseudo ?') || 'Utilisateur',
+					// On se connecte au serveur
+					socket = io.connect();
+					$('#score').prepend("<div class='pseudo'>" + pseudo + "</div>");
+					
+					// On previent l'adversaires.
+					socket.emit('register', pseudo);
+					
+					// On recupere le nom de l'adversaires (si il est deja connecté)
+					socket.on('getUsers', function () {
+						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
+						$('#scoreOpponent').prepend('<div class="pseudo" id="scoreOpponent">adversaires</div>');
+					});
+
+					//on ecoute l'arrivé d'un autre joueur.
+					socket.on('userConnected', function () {
+						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
+					});
+
+					//on ecoute les actions de l'adversaires (refreshScore)
+					socket.on('refreshScore', function (users) {
+							
+					});
+				});
+			});
+		</script>
 		
 		<div id="pinboard">
 			

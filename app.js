@@ -1,15 +1,45 @@
-var http = require('http');
-var fs = require('fs');
+"use strict";
+var http = require('http'),
+  fs = require('fs'),
+  express = require('express');
 
 // Création du serveur
-var app = http.createServer(function (req, res) {
-  // On lit notre fichier tchat.html
+/*var app = http.createServer(function (req, res) {
+  // On lit notre fichier index.html
   fs.readFile('./index.html', 'utf-8', function (error, content) {
     res.writeHead(200, {
       'Content-Type': 'text/html'
     });
     res.end(content);
   });
+});*/
+
+var app = express(),
+  server = http.createServer(app);
+console.log(app);
+
+//configure APP
+app.use(express.static(__dirname + '/'));
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
+app.get('/whatever/url/path/you/want', function (req, res) {
+  // this will match GET requests to /whatever/url/path/you/want
+});
+
+app.get('*', function (req, res) {
+  // this will match GET requests to any path
+  // take care if you use middlewares after app.router as here
+});
+
+app.post('/whatever/url/path/you/want', function (req, res) {
+  // this will match POST requests to /whatever/url/path/you/want
+});
+
+app.post('*', function (req, res) {
+  // this will match POST requests to any path
 });
 
 // Variables globales
@@ -24,11 +54,13 @@ var messages = [],
 var io = require('socket.io');
 
 // Socket.IO écoute maintenant notre application !
-io = io.listen(app);
+io = io.listen(server);
+
+io.set('authorization', function (handshakeData, accept) {});
 
 // Quand une personne se connecte au serveur
 io.sockets.on('connection', function (socket) {
-
+  console.log(socket);
   // On enregistre le nouveau joueur dans la partie.
   socket.on('register', function (pseudo) {
 
