@@ -19,27 +19,10 @@ var app = express(),
 console.log(app);
 
 //configure APP
-app.use(express.static(__dirname + '/'));
+app.use("/www", express.static(__dirname + '/www'));
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
-});
-
-app.get('/whatever/url/path/you/want', function (req, res) {
-  // this will match GET requests to /whatever/url/path/you/want
-});
-
-app.get('*', function (req, res) {
-  // this will match GET requests to any path
-  // take care if you use middlewares after app.router as here
-});
-
-app.post('/whatever/url/path/you/want', function (req, res) {
-  // this will match POST requests to /whatever/url/path/you/want
-});
-
-app.post('*', function (req, res) {
-  // this will match POST requests to any path
 });
 
 // Variables globales
@@ -55,8 +38,6 @@ var io = require('socket.io');
 
 // Socket.IO écoute maintenant notre application !
 io = io.listen(server);
-
-io.set('authorization', function (handshakeData, accept) {});
 
 // Quand une personne se connecte au serveur
 io.sockets.on('connection', function (socket) {
@@ -88,5 +69,5 @@ io.sockets.on('connection', function (socket) {
 ///////////////////
 
 // Notre application écoute sur le port 8080
-app.listen(8080);
+server.listen(8080);
 console.log('Live Chat App running at http://localhost:8080/');
