@@ -83,6 +83,42 @@
 					
 				<script src="www/scripts/soloTimer.js"></script>
 					</script>
+		<script id="multi-game-template" type="text/template">
+			<div id="scores">
+				<div class="score" id="score">0</div>
+            </div>
+            <table>
+                <tr>
+                    <td id="spring"><p>1</p></td>
+                    <td id="summer"><p>2</p></td>
+                </tr>
+                <tr>
+                    <td id="autumn"><p>3</p></td>
+                    <td id="winter"><p>4</p></td>
+                </tr>
+            </table>
+				<div class="actif 1"><img src="www/images/1.jpg" width="200" height="200" alt="Photo 1" /><span>A skiing bothy we had lunch at</span></div>
+					
+				<div class="actif 1"><img src="www/images/1.jpg" width="200" height="200" alt="Photo 2" /><span>Fantastic craggy mountains!</span></div>
+					
+				<div class="actif 1"><img src="www/images/1.jpg" width="200" height="200" alt="Photo 3" /><span>The lake was amazing</span></div>
+				
+				<div class="actif 2"><img src="www/images/2.jpg" width="200" height="200" alt="Photo 4" /><span>Ellie bought a naff snowman</span></div>
+					
+				<div class="actif 2"><img src="www/images/2.jpg" width="200" height="200" alt="Photo 5" /><span>Showing off my mad skills!</span></div>
+					
+				<div class="actif 3"><img src="www/images/3.jpg" width="200" height="200" alt="Photo 6" /><span>The edge of the glacier - breathtaking</span></div>
+					
+				<div class="actif 3"><img src="www/images/3.jpg" width="200" height="200" alt="Photo 7" /><span>Couldnt resist the powder!</span></div>
+					
+				<div class="actif 3"><img src="www/images/3.jpg" width="200" height="200" alt="Photo 8" /><span>This robin woke us up every morning</span></div>
+					
+				<div class="actif 4"><img src="www/images/4.jpg" width="200" height="200" alt="Photo 9" /><span>Aw bless!</span></div>
+					
+				<div class="actif 4"><img src="www/images/4.jpg" width="200" height="200" alt="Photo 10" /><span>One of the lifts - amazing views</span></div>
+					
+				<script src="www/scripts/multi.js"></script>
+				</script>			
 		<script id="game-over-template" type="text/template">
 			<h1 id="finalScore">Test</h1>
 			<button id="btnRestartGame">Restart ?</button>
@@ -114,32 +150,7 @@
 				});
 
 				$(document).on('click', '#btnDuelGame', function () {
-					$("#pinboard").html($('#solo-game-template').html());
-					// On demande le pseudo de l'utilisateur
-					var socket = io.connect(),
-					pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
-					console.log(io.connect());
-					// On se connecte au serveur
-					$('#score').prepend("<div class='pseudo'>" + pseudo + "</div>");
-					
-					// On previent l'adversaires.
-					socket.emit('register', pseudo);
-					
-					// On recupere le nom de l'adversaires (si il est deja connecté)
-					socket.on('getUsers', function () {
-						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
-						$('#scoreOpponent').prepend('<div class="pseudo" id="scoreOpponent">adversaires</div>');
-					});
-
-					//on ecoute l'arrivé d'un autre joueur.
-					socket.on('userConnected', function () {
-						$('#scores').append('<div class="score" id="scoreOpponent">0</div>');
-					});
-
-					//on ecoute les actions de l'adversaires (refreshScore)
-					socket.on('refreshScore', function (users) {
-							
-					});
+					$("#pinboard").html($('#multi-game-template').html());
 				});
 			});
 		</script>
