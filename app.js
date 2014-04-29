@@ -40,7 +40,6 @@ io = io.listen(server);
 
 // Quand une personne se connecte au serveur
 io.sockets.on('connection', function (socket) {
-  var me;
   // On enregistre le nouveau joueur dans la partie.
   socket.on('register', function (pseudo) {
 
@@ -54,7 +53,7 @@ io.sockets.on('connection', function (socket) {
       name: pseudo,
       score: 0
     };
-    me = pseudo;
+    socket.username = pseudo;
 
     // On previent sa connexion à l'adversaire.
     socket.broadcast.emit('userConnected', users[pseudo]);
@@ -64,13 +63,13 @@ io.sockets.on('connection', function (socket) {
   socket.on('getPoint', function (score) {
     console.log('======>>' + score);
     // On modifie le score joueur (variable globale commune à tous les clients connectés au serveur)
-    users[me] = {
-      name: me,
+    users[socket.username] = {
+      name: socket.username,
       score: score
     };
-    console.log(users[me]);
+    console.log(users[socket.username]);
     // On envoie à tout les clients connectés (sauf celui qui a appelé l'événement) les nouveaux scores
-    socket.broadcast.emit('refreshScore', users[me]);
+    socket.broadcast.emit('refreshScore', users[socket.username]);
   });
 });
 
