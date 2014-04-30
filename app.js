@@ -71,6 +71,12 @@ io.sockets.on('connection', function (socket) {
     // On envoie à tout les clients connectés (sauf celui qui a appelé l'événement) les nouveaux scores
     socket.broadcast.emit('refreshScore', users[socket.username]);
   });
+
+  // Quand un joueur a terminé la partie est fermée.
+  socket.on('endGame', function () {
+    socket.broadcast.emit('stopGame', users);
+    socket.emit('stopGame', users);
+  });
 });
 
 ///////////////////
