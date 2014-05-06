@@ -133,7 +133,7 @@ io.sockets.on('connection', function (socket) {
 
   // Quand un joueur a terminé la partie est fermée.
   socket.on('endGame', function () {
-    socket.sockets.emit('stopGame', peoples.allPeoples);
+    io.sockets.emit('stopGame', peoples.allPeoples);
   });
 });
 
