@@ -16,8 +16,6 @@ $(document).ready(function () {
 
   // On recupere le nom de l'adversaires (si il est deja connecté)
   socket.on('getUsers', function (users) {
-    users = _.toArray(users);
-    console.log(users);
     users.forEach(function (opponentDatas, index, array) {
       $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
       $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
@@ -143,9 +141,9 @@ $(document).ready(function () {
   }
 
   function endGame(datas) {
-    console.log(datas);
+    console.log(datas)
     $("#pinboard").html($('#game-over-template').html());
-    $("#finalScore").html(score);
+    $("#finalScore").html("My score : " + score);
     $(document).on('click', '#btnRestartGame', function () {
       $("#pinboard").html($('#multi-game-template').html());
     });

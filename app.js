@@ -95,7 +95,7 @@ io.sockets.on('connection', function (socket) {
 
     //On envoit la liste des joueurs connectés
     //socket.emit('getUsers', users);
-    socket.emit("getUsers", peoples.allPeoples);
+    socket.emit("getUsers", _.toArray(peoples.allPeoples));
 
     user = {
       id: socket.id,
@@ -133,7 +133,7 @@ io.sockets.on('connection', function (socket) {
 
   // Quand un joueur a terminé la partie est fermée.
   socket.on('endGame', function () {
-    io.sockets.emit('stopGame', peoples.allPeoples);
+    io.sockets.emit('stopGame', _.toArray(peoples.allPeoples));
   });
 });
 
