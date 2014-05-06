@@ -141,9 +141,15 @@ $(document).ready(function () {
   }
 
   function endGame(datas) {
-    console.log(datas)
+    console.log(datas);
     $("#pinboard").html($('#game-over-template').html());
     $("#finalScore").html("My score : " + score);
+
+    datas.forEach(function (opponentDatas, index, array) {
+      $('#opponentScores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
+      $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
+    });
+
     $(document).on('click', '#btnRestartGame', function () {
       $("#pinboard").html($('#multi-game-template').html());
     });

@@ -95,6 +95,7 @@ io.sockets.on('connection', function (socket) {
 
     //On envoit la liste des joueurs connectés
     //socket.emit('getUsers', users);
+    console.log(_.toArray(peoples.allPeoples));
     socket.emit("getUsers", _.toArray(peoples.allPeoples));
 
     user = {
@@ -105,8 +106,6 @@ io.sockets.on('connection', function (socket) {
 
     //On enregistre le nouveau joueur dans la liste.
     peoples.addPeople(user);
-
-    console.log(peoples.getPeopleByName(socket.id)[0]);
 
     // On previent sa connexion à l'adversaire.
     socket.broadcast.emit('userConnected', peoples.getPeopleByName(socket.id)[0]);
@@ -127,13 +126,13 @@ io.sockets.on('connection', function (socket) {
     peoples.allPeoples[(socket.id)] = user;
 
     // On envoie à tout les clients connectés (sauf celui qui a appelé l'événement) les nouveaux scores
-    console.log(peoples.getPeopleByName(socket.id)[0]);
     socket.broadcast.emit('refreshScore', peoples.getPeopleByName(socket.id)[0]);
   });
 
   // Quand un joueur a terminé la partie est fermée.
   socket.on('endGame', function () {
     io.sockets.emit('stopGame', _.toArray(peoples.allPeoples));
+    peoples = new Peoples();
   });
 });
 
