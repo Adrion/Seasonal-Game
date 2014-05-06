@@ -16,16 +16,16 @@ $(document).ready(function () {
 
   // On recupere le nom de l'adversaires (si il est deja connecté)
   socket.on('getUsers', function (users) {
+    users = _.toArray(users);
     console.log(users);
-    /*users.forEach(function (element, index, array) {
-              $('#scores').append('<div class="score" id="scoreOpponent">' + element.score + '</div>');
-              $('#scoreOpponent').prepend('<div class="pseudo" id="scoreOpponent">' + element.name + '</div>');
-            });*/
+    users.forEach(function (opponentDatas, index, array) {
+      $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
+      $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
+    });
   });
 
   //on ecoute l'arrivé d'un autre joueur.
   socket.on('userConnected', function (opponentDatas) {
-    console.log(opponentDatas);
     $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
     $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
   });
