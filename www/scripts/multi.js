@@ -145,8 +145,10 @@ $(document).ready(function () {
     $("#pinboard").html($('#game-over-template').html());
     $("#finalScore").html("My score : " + score);
 
+    $("#classement").prepend('<h2>Classement</h2>');
+
     datas.forEach(function (opponentDatas, index, array) {
-      $('#opponentScores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
+      $('#classement').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
       $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
     });
 

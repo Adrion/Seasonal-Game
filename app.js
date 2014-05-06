@@ -48,7 +48,7 @@ _.extend(Peoples.prototype, {
   },
 
   getAllPeopleExcept: function (id) {
-    return _.except(this.allPeoples, {
+    return _.reject(this.allPeoples, {
       id: id
     });
   },
@@ -72,7 +72,7 @@ var peoples = new Peoples();
 
 // Variables globales
 // Ces variables resteront durant toute la vie du seveur et sont communes pour chaque client (node server.js)
-var users = {}, user;
+var users = {};
 
 //// SOCKET.IO ////
 
@@ -91,21 +91,17 @@ io.sockets.on('connection', function (socket) {
   // On enregistre le nouveau joueur dans la partie.
   socket.on('register', function (pseudo) {
 
-    console.log(peoples.allPeoples);
-
     //On envoit la liste des joueurs connectés
     //socket.emit('getUsers', users);
     console.log(_.toArray(peoples.allPeoples));
     socket.emit("getUsers", _.toArray(peoples.allPeoples));
 
-    user = {
+    //On enregistre le nouveau joueur dans la liste.
+    peoples.addPeople({
       id: socket.id,
       name: pseudo,
       score: 0
-    };
-
-    //On enregistre le nouveau joueur dans la liste.
-    peoples.addPeople(user);
+    });
 
     // On previent sa connexion à l'adversaire.
     socket.broadcast.emit('userConnected', peoples.getPeopleByName(socket.id)[0]);
@@ -117,13 +113,12 @@ io.sockets.on('connection', function (socket) {
     console.log('======>>' + score);
 
     // On modifie le score joueur (variable globale commune à tous les clients connectés au serveur)
-    user = {
+    peoples.allPeoples[socket.id] = {
       id: socket.id,
-      name: user.name,
+      name: peoples.allPeoples[socket.id].name,
       score: score
     };
-
-    peoples.allPeoples[(socket.id)] = user;
+    console.log(peoples.allPeoples[socket.id]);
 
     // On envoie à tout les clients connectés (sauf celui qui a appelé l'événement) les nouveaux scores
     socket.broadcast.emit('refreshScore', peoples.getPeopleByName(socket.id)[0]);
@@ -131,7 +126,7 @@ io.sockets.on('connection', function (socket) {
 
   // Quand un joueur a terminé la partie est fermée.
   socket.on('endGame', function () {
-    io.sockets.emit('stopGame', _.toArray(peoples.allPeoples));
+    io.sockets.emit('stopGame', _.sortBy(_.toArray(peoples.allPeoples), 'score').reverse());
     peoples = new Peoples();
   });
 });
