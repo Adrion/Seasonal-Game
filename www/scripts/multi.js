@@ -28,6 +28,11 @@ $(document).ready(function () {
     $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
   });
 
+  //on ecoute le depart de la partie.
+  socket.on('usersReady', function () {
+    $('#wrapper').hide();
+  });
+
   //on ecoute les actions de l'adversaires (refreshScore)
   socket.on('refreshScore', function (opponentDatas) {
     $('#' + opponentDatas.id + '').html('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');

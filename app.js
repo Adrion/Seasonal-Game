@@ -72,7 +72,8 @@ var peoples = new Peoples();
 
 // Variables globales
 // Ces variables resteront durant toute la vie du seveur et sont communes pour chaque client (node server.js)
-var users = {};
+var users = {},
+  roomSlots = 3;
 
 //// SOCKET.IO ////
 
@@ -88,6 +89,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('disconnect', function () {
     console.log('Got disconnect!' + socket.id);
   });
+
   // On enregistre le nouveau joueur dans la partie.
   socket.on('register', function (pseudo) {
 
@@ -105,7 +107,12 @@ io.sockets.on('connection', function (socket) {
 
     // On previent sa connexion à l'adversaire.
     socket.broadcast.emit('userConnected', peoples.getPeopleByName(socket.id)[0]);
+    console.log(_.toArray(peoples.allPeoples).length);
 
+    //Si le nombre de joueur requis est atteint on lance la partie.
+    if (_.toArray(peoples.allPeoples).length === roomSlots) {
+      io.sockets.emit('usersReady');
+    }
   });
 
   // Quand on reçoit une action d'un joueur
