@@ -85,7 +85,9 @@ io = io.listen(server);
 io.sockets.on('connection', function (socket) {
 
   //Tant que le nombre de joueur n'est pas atteint on accepte les connexions.
-
+  socket.on('disconnect', function () {
+    console.log('Got disconnect!' + socket.id);
+  });
   // On enregistre le nouveau joueur dans la partie.
   socket.on('register', function (pseudo) {
 
