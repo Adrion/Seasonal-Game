@@ -1,7 +1,7 @@
 "use strict";
 var http = require('http'),
-  fs = require('fs'),
-  express = require('express');
+    fs = require('fs'),
+    express = require('express');
 
 // Création du serveur
 /*var app = http.createServer(function (req, res) {
@@ -15,21 +15,64 @@ var http = require('http'),
 });*/
 
 var app = express(),
-  server = http.createServer(app);
+    server = http.createServer(app);
 
 //configure APP
 app.use("/www", express.static(__dirname + '/www'));
 
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+app.get('/', function(req, res) {
+    res.sendfile(__dirname + '/index.html');
 });
+
+/// LODASH ///
+var _ = require('lodash');
+
+function Peoples() {
+    this.allPeoples = {};
+}
+
+_.extend(Peoples.prototype, {
+
+    addPeople: function(user) {
+        this.allPeoples[user.id] = {
+            id: user.id,
+            name: user.name,
+            score: user.score
+        };
+    },
+
+    getPeopleByName: function(id) {
+        return _.where(this.allPeoples, {
+            id: id
+        });
+    },
+
+    getAllPeopleExcept: function(id) {
+        return _.except(this.allPeoples, {
+            id: id
+        });
+    },
+
+    deletePeople: function(id) {
+
+        toDelete = this.getPeopleByName(id);
+
+        if (toDelete) {
+            delete this.allPeoples[toDelete.id];
+            return true;
+        }
+        return false;
+    }
+});
+
+// init game group
+var peoples = new Peoples();
+
+///////////////////
 
 // Variables globales
 // Ces variables resteront durant toute la vie du seveur et sont communes pour chaque client (node server.js)
-// Liste des messages de la forme { pseudo : 'Mon pseudo', message : 'Mon message' }
-var messages = [],
-  users = {},
-  scores = {};
+var users = {};
 
 //// SOCKET.IO ////
 
@@ -39,44 +82,53 @@ var io = require('socket.io');
 io = io.listen(server);
 
 // Quand une personne se connecte au serveur
-io.sockets.on('connection', function (socket) {
-  // On enregistre le nouveau joueur dans la partie.
-  socket.on('register', function (pseudo) {
+io.sockets.on('connection', function(socket) {
 
-    console.log(users);
-    //On envoit la liste des joueurs connectés
-    //socket.emit('getUsers', users);
-    socket.emit("getUsers", users);
+    //Tant que le nombre de joueur n'est pas atteint on accepte les connexions.
 
-    //On enregistre le nouveau joueur dans la liste.
-    users[pseudo] = {
-      name: pseudo,
-      score: 0
-    };
-    socket.username = pseudo;
+    // On enregistre le nouveau joueur dans la partie.
+    socket.on('register', function(pseudo) {
 
-    // On previent sa connexion à l'adversaire.
-    socket.broadcast.emit('userConnected', users[pseudo]);
-  });
+        console.log(peoples.allPeoples);
 
-  // Quand on reçoit une action d'un joueur
-  socket.on('getPoint', function (score) {
-    console.log('======>>' + score);
-    // On modifie le score joueur (variable globale commune à tous les clients connectés au serveur)
-    users[socket.username] = {
-      name: socket.username,
-      score: score
-    };
-    console.log(users[socket.username]);
-    // On envoie à tout les clients connectés (sauf celui qui a appelé l'événement) les nouveaux scores
-    socket.broadcast.emit('refreshScore', users[socket.username]);
-  });
+        //On envoit la liste des joueurs connectés
+        //socket.emit('getUsers', users);
+        socket.emit("getUsers", peoples.allPeoples);
 
-  // Quand un joueur a terminé la partie est fermée.
-  socket.on('endGame', function () {
-    socket.broadcast.emit('stopGame', users);
-    socket.emit('stopGame', users);
-  });
+        var user = {
+            id: socket.id,
+            name: pseudo,
+            score: 0
+        };
+
+        //On enregistre le nouveau joueur dans la liste.
+        peoples.addPeople(user);
+
+        console.log(peoples.getPeopleByName(socket.id)[0]);
+
+        // On previent sa connexion à l'adversaire.
+        socket.broadcast.emit('userConnected', peoples.getPeopleByName(socket.id)[0]);
+
+    });
+
+    // Quand on reçoit une action d'un joueur
+    socket.on('getPoint', function(score) {
+        console.log('======>>' + score);
+
+        // On modifie le score joueur (variable globale commune à tous les clients connectés au serveur)
+        users[socket.username] = {
+            name: socket.username,
+            score: score
+        };
+
+        // On envoie à tout les clients connectés (sauf celui qui a appelé l'événement) les nouveaux scores
+        socket.broadcast.emit('refreshScore', peoples.getPeopleByName(socket.id)[0]);
+    });
+
+    // Quand un joueur a terminé la partie est fermée.
+    socket.on('endGame', function() {
+        socket.sockets.emit('stopGame', users);
+    });
 });
 
 ///////////////////
