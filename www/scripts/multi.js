@@ -146,7 +146,7 @@ $(document).ready(function () {
   }
 
   function endGame(datas) {
-    console.log(datas);
+
     $("#pinboard").html($('#game-over-template').html());
     $("#finalScore").html("My score : " + score);
 
@@ -158,7 +158,8 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#btnRestartGame', function () {
-      $("#pinboard").html($('#multi-game-template').html());
+      //$("#pinboard").html($('#multi-game-template').html());
+      document.location.reload();
     });
   }
 });
