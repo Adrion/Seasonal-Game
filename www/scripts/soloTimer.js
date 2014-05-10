@@ -6,8 +6,12 @@ function soloTimerInit() {
 
   // Create your interaction code here
   $("#pinboard div.actif").each(function () {
-    var xpos = Math.floor(Math.random()),
-      ypos = Math.floor(Math.random()),
+    var widthCard = $("#pinboard div.actif").width(),
+      heightCard = $("#pinboard div.actif").width(),
+      widthArea = $("#pinboard").width(),
+      heightArea = $("#pinboard").height(),
+      xpos = Math.floor(Math.random()) + (widthArea / 2) - (widthCard / 2),
+      ypos = Math.floor(Math.random()) + (heightArea / 2) - (heightCard / 2),
       rotation = Math.floor(Math.random() * 15);
     if (Math.floor(Math.random() * 11) > 5) {
       rotation = rotation * -1;
@@ -138,7 +142,6 @@ function chrono() {
 function chronoStart() {
   start = new Date();
   chrono();
-  console.log('soloTimerChrono');
 }
 
 function chronoContinue() {

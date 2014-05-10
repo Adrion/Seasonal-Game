@@ -40,11 +40,14 @@
 	}
 	
 	/*Diapo media queries*/
-	@media (max-width: 400px) {
+	@media (max-width: 500px) {
 		#pinboard div.actif {
-			width: 45%;
+			width: 40%;
 			height: 0;
-			padding-bottom: 45%;
+			padding-bottom: 40%;
+		}
+		#pinboard div.actif span{
+			display: none;
 		}
 	}
 
