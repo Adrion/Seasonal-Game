@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-﻿$(document).ready(function ($) {
-=======
 'use strict';
 
 function soloPointsInit() {
->>>>>>> Stashed changes
-  'use strict';
   var zindex = 50,
     score = 0;
   // Create your interaction code here
