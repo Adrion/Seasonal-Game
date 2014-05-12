@@ -1,13 +1,9 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function ($) {
   'use strict';
   var zindex = 50,
     score = 0;
   // Create your interaction code here
   $("#pinboard div.actif").each(function () {
-    // console.log($(window).height());
-    // console.log($(document).height());
-    console.log($("#pinboard ul li").width());
-    console.log($("#pinboard").width());
     var xpos = Math.floor(Math.random()),
       ypos = Math.floor(Math.random()),
       rotation = Math.floor(Math.random() * 15);
@@ -111,6 +107,7 @@
     $("#pinboard").html($('#game-over-template').html());
     $("#finalScore").html(score);
     $(document).on('click', '#btnRestartGame', function () {
+      console.log("point restart event");
       $("#pinboard").html($('#solo-game-template').html());
     });
   }
