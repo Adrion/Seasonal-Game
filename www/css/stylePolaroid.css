@@ -40,11 +40,22 @@
 	}
 	
 	/*Diapo media queries*/
-	@media (max-width: 500px) {
+	@media (max-width: 500px) and (orientation: portrait) {
 		#pinboard div.actif {
 			width: 40%;
 			height: 0;
 			padding-bottom: 40%;
+		}
+		#pinboard div.actif span{
+			display: none;
+		}
+	}
+
+	@media (max-width: 666px) and (orientation: landscape) {
+		#pinboard div.actif {
+			width: 30%;
+			height: 0;
+			padding-bottom: 30%;
 		}
 		#pinboard div.actif span{
 			display: none;
