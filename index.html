@@ -8,7 +8,8 @@
 		<script src="www/scripts/js/jquery-1.9.1.js"></script>
 		<script src="www/scripts/js/jquery-ui-1.10.2.custom.js"></script>
         <script src="www/scripts/js/jquery-ui.js"></script>
-		
+		<script src="www/scripts/points.js"></script>
+		<script src="www/scripts/soloTimer.js"></script>
 	</head>
 	<body>
 		<script id="solo-game-template" type="text/template">
@@ -44,8 +45,7 @@
 				<div class="actif 4"><img src="www/images/4.jpg" width="200" height="200" alt="Photo 9" /><span>Aw bless!</span></div>
 					
 				<div class="actif 4"><img src="www/images/4.jpg" width="200" height="200" alt="Photo 10" /><span>One of the lifts - amazing views</span></div>
-					
-				<script src="www/scripts/points.js"></script>
+
 				</script>
 		<script id="soloTime-game-template" type="text/template">
 			<div id="scores">
@@ -81,7 +81,6 @@
 					
 				<div class="actif 4"><img src="www/images/4.jpg" width="200" height="200" alt="Photo 10" /><span>One of the lifts - amazing views</span></div>
 					
-				<script src="www/scripts/soloTimer.js"></script>
 					</script>
 		<script id="multi-game-template" type="text/template">
 			<div id="wrapper">Waiting for player</div>
@@ -141,10 +140,12 @@
 
 				$(document).on('click', '#btnSoloGame', function () {
 					$("#pinboard").html($('#solo-game-template').html());
+					soloPointsInit();
 				});
 
 				$(document).on('click', '#btnSoloSpeedGame', function () {
 					$("#pinboard").html($('#soloTime-game-template').html());
+					soloTimerInit()
 				});
 
 				$(document).on('click', '#btnMenu', function () {

@@ -1,7 +1,9 @@
-$(document).ready(function ($) {
-  'use strict';
+'use strict';
+
+function soloTimerInit() {
   var zindex = 50,
     score;
+
   // Create your interaction code here
   $("#pinboard div.actif").each(function () {
     var xpos = Math.floor(Math.random()),
@@ -83,23 +85,23 @@ $(document).ready(function ($) {
 
   function checkStillDiv() {
     if (!$('#pinboard div.actif')[0]) {
-      endGame();
-      //console.log("il en reste plus");
+      endGameTimer();
     }
   }
 
-  function endGame() {
+  function endGameTimer() {
     chronoStop();
     score = $("#score").html();
     $("#pinboard").html($('#game-over-template').html());
+    $('#btnRestartGame').addClass('timer');
     $("#finalScore").html(score);
-    $(document).on('click', '#btnRestartGame', function () {
-      console.log("Timer restart event");
+    $(document).one('click', '.timer', function () {
       $("#pinboard").html($('#soloTime-game-template').html());
+      soloTimerInit();
     });
   }
 
-});
+}
 
 /*jshint strict:false */
 
@@ -136,6 +138,7 @@ function chrono() {
 function chronoStart() {
   start = new Date();
   chrono();
+  console.log('soloTimerChrono');
 }
 
 function chronoContinue() {

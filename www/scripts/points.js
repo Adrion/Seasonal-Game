@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 ﻿$(document).ready(function ($) {
+=======
+'use strict';
+
+function soloPointsInit() {
+>>>>>>> Stashed changes
   'use strict';
   var zindex = 50,
     score = 0;
@@ -98,17 +104,17 @@
 
   function checkStillDiv() {
     if (!$('#pinboard div.actif')[0]) {
-      endGame();
-      console.log("il en reste plus");
+      endGamePoints();
     }
   }
 
-  function endGame() {
+  function endGamePoints() {
     $("#pinboard").html($('#game-over-template').html());
     $("#finalScore").html(score);
-    $(document).on('click', '#btnRestartGame', function () {
-      console.log("point restart event");
+    $('#btnRestartGame').addClass('points');
+    $(document).one('click', '.points', function () {
       $("#pinboard").html($('#solo-game-template').html());
+      soloPointsInit();
     });
   }
-});
+}
