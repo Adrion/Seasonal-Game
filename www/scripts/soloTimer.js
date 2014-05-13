@@ -53,7 +53,7 @@ function soloTimerInit() {
   });
 
   $("#spring").droppable({
-    accept: ".1",
+    accept: ".printemps",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
@@ -61,7 +61,7 @@ function soloTimerInit() {
   });
 
   $("#summer").droppable({
-    accept: ".2",
+    accept: ".ete",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
@@ -69,7 +69,7 @@ function soloTimerInit() {
   });
 
   $("#autumn").droppable({
-    accept: ".3",
+    accept: ".automne",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();
@@ -77,7 +77,7 @@ function soloTimerInit() {
   });
 
   $("#winter").droppable({
-    accept: ".4",
+    accept: ".hiver",
     drop: function (event, ui) {
       ui.draggable.remove();
       checkStillDiv();

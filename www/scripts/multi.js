@@ -91,7 +91,7 @@ $(document).ready(function () {
 
   $("#spring").droppable({
     drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === '1') {
+      if (ui.draggable[0].classList[1] === 'printemps') {
         getpoint(5);
       } else {
         getpoint(-3);
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
   $("#summer").droppable({
     drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === '2') {
+      if (ui.draggable[0].classList[1] === 'ete') {
         getpoint(5);
       } else {
         getpoint(-3);
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
   $("#autumn").droppable({
     drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === '3') {
+      if (ui.draggable[0].classList[1] === 'automne') {
         getpoint(5);
       } else {
         getpoint(-3);
@@ -127,7 +127,7 @@ $(document).ready(function () {
 
   $("#winter").droppable({
     drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === '4') {
+      if (ui.draggable[0].classList[1] === 'hiver') {
         getpoint(5);
       } else {
         getpoint(-3);
