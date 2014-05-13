@@ -101,14 +101,13 @@
 				'use strict';
 				$("#pinboard").html($('#menu-template').html());
 
+				//Set Nav Handler.
 				$(document).on('click', '#btnSoloGame', function () {
-					$("#pinboard").html($('#solo-game-template').html());
-					createCards(soloPointsInit);
+					$(document).trigger('startPoints');
 				});
 
 				$(document).on('click', '#btnSoloSpeedGame', function () {
-					$("#pinboard").html($('#soloTime-game-template').html());
-					createCards(soloTimerInit);
+					$(document).trigger('startTimer');
 				});
 
 				$(document).on('click', '#btnMenu', function () {
@@ -117,6 +116,18 @@
 
 				$(document).on('click', '#btnDuelGame', function () {
 					$("#pinboard").html($('#multi-game-template').html());
+				});
+
+				$(document).on('startPoints', function(e){
+					$("#pinboard").html($('#solo-game-template').html());
+					createCards(soloPointsInit);
+				});
+				$(document).on('startTimer', function(e){
+					$("#pinboard").html($('#soloTime-game-template').html());
+					createCards(soloTimerInit);
+				});
+				$(document).on('startmulti', function(e){
+					alert('multi');
 				});
 
 				//Create Cards with datas

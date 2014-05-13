@@ -100,8 +100,7 @@ function soloTimerInit() {
     $('#btnRestartGame').addClass('timer');
     $("#finalScore").html(score);
     $(document).one('click', '.timer', function () {
-      $("#pinboard").html($('#soloTime-game-template').html());
-      soloTimerInit();
+      $(document).trigger('startTimer');
     });
   }
 

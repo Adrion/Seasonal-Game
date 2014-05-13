@@ -112,8 +112,7 @@ function soloPointsInit() {
     $("#finalScore").html(score);
     $('#btnRestartGame').addClass('points');
     $(document).one('click', '.points', function () {
-      $("#pinboard").html($('#solo-game-template').html());
-      soloPointsInit();
+      $(document).trigger('startPoints');
     });
   }
 }
