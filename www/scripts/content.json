@@ -59,6 +59,18 @@
     "url": "pasteque.jpg"
   },
 
+  "tomate": {
+    "fr": "tomate",
+    "saison": ["ete", "automne"],
+    "url": "tomate.jpg"
+  },
+
+  "raisin": {
+    "fr": "raisin",
+    "saison": ["automne"],
+    "url": "raisin.jpg"
+  },
+
   "pomme": {
     "fr": "pomme",
     "saison": ["automne"],
