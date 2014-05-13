@@ -5,22 +5,10 @@
     "url": "kiwi.jpg"
   },
 
-  "morille": {
-    "fr": "morille",
-    "saison": ["printemps"],
-    "url": "morille.jpg"
-  },
-
   "fraise": {
     "fr": "fraise",
     "saison": ["ete"],
     "url": "fraise.jpg"
-  },
-
-  "menthe": {
-    "fr": "menthe",
-    "saison": ["ete"],
-    "url": "menthe.jpg"
   },
 
   "melon": {
@@ -83,22 +71,10 @@
     "url": "oignon.jpg"
   },
 
-  "noisette": {
-    "fr": "noisette",
-    "saison": ["automne"],
-    "url": "noisette.jpg"
-  },
-
   "poire": {
     "fr": "poire",
     "saison": ["automne"],
     "url": "poire.jpg"
-  },
-
-  "mandarine": {
-    "fr": "mandarine",
-    "saison": ["automne", "hiver"],
-    "url": "mandarine.jpg"
   },
 
   "ananas": {
