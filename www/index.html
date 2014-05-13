@@ -141,11 +141,13 @@
 
 				$(document).on('click', '#btnSoloGame', function () {
 					$("#pinboard").html($('#solo-game-template').html());
+					createCards();
 					soloPointsInit();
 				});
 
 				$(document).on('click', '#btnSoloSpeedGame', function () {
 					$("#pinboard").html($('#soloTime-game-template').html());
+					createCards();
 					soloTimerInit()
 				});
 
@@ -156,6 +158,20 @@
 				$(document).on('click', '#btnDuelGame', function () {
 					$("#pinboard").html($('#multi-game-template').html());
 				});
+
+				//Create Cards with datas
+				function createCards(){
+
+					//on appele les données
+					var datas = 
+					
+					//on le transforme en tableau.
+					
+					//on crée les cartes.
+					datas.forEach(function (cardDatas, index, array) {
+				      $('#pinboard').append('<div class="actif ' + cardDatas.saison[0] + '><img src="' + cardDatas.url + '"/><span>' + cardDatas.fr + '</span></div>');
+				    });
+				}
 
 				//Hande orientation change
 				$( window ).resize(function(event) {
