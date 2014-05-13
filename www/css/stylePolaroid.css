@@ -1,4 +1,4 @@
-﻿	body {
+	body {
 		background:		transparent url(corkboard.jpg) repeat top left;		
 	}
 	
@@ -20,8 +20,10 @@
 		padding:		0;
 		list-style:		none;
 		background:		#fefefe;
-		width:			200px;
-		height:			200px;
+		max-width:			200px;
+		max-height:			200px;
+        overflow:hidden;
+        
 		/*padding:		20px 20px 40px 20px;*/
 		/*box-shadow*/
 		-webkit-box-shadow:		0px 0px 5px #000;
@@ -37,8 +39,33 @@
 		transition:		0.2s transform linear;
 	}
 	
+	/*Diapo media queries*/
+	@media (max-width: 500px) and (orientation: portrait) {
+		#pinboard div.actif {
+			width: 40%;
+			height: 0;
+			padding-bottom: 40%;
+		}
+		#pinboard div.actif span{
+			display: none;
+		}
+	}
+
+	@media (max-width: 666px) and (orientation: landscape) {
+		#pinboard div.actif {
+			width: 30%;
+			height: 0;
+			padding-bottom: 30%;
+		}
+		#pinboard div.actif span{
+			display: none;
+		}
+	}
+
+
 	#pinboard div img {
 		border:			1px solid #ccc;
+        overflow:hidden;
 	}
 	
 	#pinboard div span {
