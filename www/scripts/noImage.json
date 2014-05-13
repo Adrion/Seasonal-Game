@@ -1,0 +1,26 @@
+{
+  "menthe": {
+    "fr": "menthe",
+    "saison": ["ete"],
+    "url": "menthe.jpg"
+  },
+
+  "morille": {
+    "fr": "morille",
+    "saison": ["printemps"],
+    "url": "morille.jpg"
+  },
+
+  "noisette": {
+    "fr": "noisette",
+    "saison": ["automne"],
+    "url": "noisette.jpg"
+  },
+
+  "mandarine": {
+    "fr": "mandarine",
+    "saison": ["automne", "hiver"],
+    "url": "mandarine.jpg"
+  }
+
+}

@@ -1,7 +1,3 @@
-	body {
-		background:		transparent url(corkboard.jpg) repeat top left;		
-	}
-	
 	#pinboard {
 		width:			100%;
 		height:			100%;
@@ -64,8 +60,8 @@
 
 
 	#pinboard div img {
-		border:			1px solid #ccc;
-        overflow:hidden;
+        max-width: 100%;
+        height: auto;
 	}
 	
 	#pinboard div span {

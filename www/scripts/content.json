@@ -1,0 +1,103 @@
+{
+  "kiwi": {
+    "fr": "kiwi",
+    "saison": ["hiver", "printemps"],
+    "url": "kiwi.jpg"
+  },
+
+  "fraise": {
+    "fr": "fraise",
+    "saison": ["ete"],
+    "url": "fraise.jpg"
+  },
+
+  "melon": {
+    "fr": "melon",
+    "saison": ["ete"],
+    "url": "melon.jpg"
+  },
+
+  "cassis": {
+    "fr": "cassis",
+    "saison": ["ete"],
+    "url": "cassis.jpg"
+  },
+
+  "cornichon": {
+    "fr": "cornichon",
+    "saison": ["ete"],
+    "url": "cornichon.jpg"
+  },
+
+  "citron": {
+    "fr": "citron",
+    "saison": ["ete"],
+    "url": "citron.jpg"
+  },
+
+  "framboise": {
+    "fr": "framboise",
+    "saison": ["ete"],
+    "url": "framboise.jpg"
+  },
+
+  "pasteque": {
+    "fr": "pasteque",
+    "saison": ["ete"],
+    "url": "pasteque.jpg"
+  },
+
+  "tomate": {
+    "fr": "tomate",
+    "saison": ["ete", "automne"],
+    "url": "tomate.jpg"
+  },
+
+  "raisin": {
+    "fr": "raisin",
+    "saison": ["automne"],
+    "url": "raisin.jpg"
+  },
+
+  "pomme": {
+    "fr": "pomme",
+    "saison": ["automne"],
+    "url": "pomme.jpg"
+  },
+
+  "oignon": {
+    "fr": "oignon",
+    "saison": ["automne"],
+    "url": "oignon.jpg"
+  },
+
+  "poire": {
+    "fr": "poire",
+    "saison": ["automne"],
+    "url": "poire.jpg"
+  },
+
+  "ananas": {
+    "fr": "ananas",
+    "saison": ["hiver"],
+    "url": "ananas.jpg"
+  },
+
+  "avocat": {
+    "fr": "avocat",
+    "saison": ["hiver"],
+    "url": "avocat.jpg"
+  },
+
+  "orange": {
+    "fr": "orange",
+    "saison": ["hiver"],
+    "url": "orange.jpg"
+  },
+
+  "coco": {
+    "fr": "coco",
+    "saison": ["hiver"],
+    "url": "coco.jpg"
+  }
+}
