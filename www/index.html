@@ -115,7 +115,7 @@
 				});
 
 				$(document).on('click', '#btnDuelGame', function () {
-					$("#pinboard").html($('#multi-game-template').html());
+					$(document).trigger('startMulti');
 				});
 
 				$(document).on('startPoints', function(e){
@@ -127,7 +127,8 @@
 					createCards(soloTimerInit);
 				});
 				$(document).on('startmulti', function(e){
-					alert('multi');
+					//$("#pinboard").html($('#multi-game-template').html());
+					alert('En maintenance');
 				});
 
 				//Create Cards with datas
