@@ -59,12 +59,12 @@
 	}
 
 
-	#pinboard div img {
+	#pinboard div.actif img {
         max-width: 100%;
         height: auto;
 	}
 	
-	#pinboard div span {
+	#pinboard div.actif span {
 		position:		absolute;
 		bottom:			15px;
 		left:			20px;
