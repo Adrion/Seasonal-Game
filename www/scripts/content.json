@@ -5,6 +5,12 @@
     "url": "kiwi.jpg"
   },
 
+  "carotte": {
+    "fr": "carotte",
+    "saison": ["printemps", "ete"],
+    "url": "carotte.jpg"
+  },
+
   "fraise": {
     "fr": "fraise",
     "saison": ["ete"],
@@ -41,6 +47,12 @@
     "url": "framboise.jpg"
   },
 
+  "groseille": {
+    "fr": "groseille",
+    "saison": ["ete"],
+    "url": "groseille.jpg"
+  },
+
   "pasteque": {
     "fr": "pasteque",
     "saison": ["ete"],
@@ -51,6 +63,18 @@
     "fr": "tomate",
     "saison": ["ete", "automne"],
     "url": "tomate.jpg"
+  },
+
+  "prune": {
+    "fr": "prune",
+    "saison": ["ete", "automne"],
+    "url": "prune.jpg"
+  },
+
+  "potiron": {
+    "fr": "potiron",
+    "saison": ["automne", "ete"],
+    "url": "potiron.jpg"
   },
 
   "raisin": {
@@ -87,6 +111,12 @@
     "fr": "avocat",
     "saison": ["hiver"],
     "url": "avocat.jpg"
+  },
+
+  "banane": {
+    "fr": "banane",
+    "saison": ["hiver"],
+    "url": "banane.jpg"
   },
 
   "orange": {
