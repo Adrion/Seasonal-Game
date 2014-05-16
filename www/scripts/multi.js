@@ -1,11 +1,12 @@
-$(document).ready(function () {
-  'use strict';
+'use strict';
+
+function multiInit() {
   var zindex = 50,
     score = 0,
 
     //SOCKET IO
     // On demande le pseudo de l'utilisateur
-    socket = io.connect(),
+    socket = io.connect("seasonal-game.herokuapp.com"),
     pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
 
   // On se connecte au serveur
@@ -166,4 +167,4 @@ $(document).ready(function () {
       document.location.reload();
     });
   }
-});
+}
