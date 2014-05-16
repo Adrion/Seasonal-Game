@@ -18,10 +18,10 @@ var app = express(),
   server = http.createServer(app);
 
 //configure APP
-app.use("/www", express.static(__dirname + '/www'));
+app.use("/", express.static(__dirname + '/www'));
 
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  res.sendfile(__dirname + '/www/index.html');
 });
 
 /// LODASH ///
