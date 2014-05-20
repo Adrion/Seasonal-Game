@@ -8,7 +8,7 @@ function multiInit() {
     //SOCKET IO
     // On demande le pseudo de l'utilisateur
     socket = io.connect("seasonal-game.herokuapp.com"),
-    pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
+    pseudo = prompt('Votre pseudo ?') || $('#btnMenu').trigger("click");
 
   // On se connecte au serveur
   $('#scores').prepend("<div class='pseudo'>" + pseudo + "</div>");
@@ -179,8 +179,7 @@ function multiInit() {
     });
 
     $(document).on('click', '#btnRestartGame', function () {
-      //$("#pinboard").html($('#multi-game-template').html());
-      document.location.reload();
+      $(document).trigger('startMulti');
     });
   }
 }
