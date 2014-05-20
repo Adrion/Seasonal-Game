@@ -183,7 +183,8 @@ function multiInit() {
       $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
     });
   }
-}
-  $(document).one('click', '#btnRestartGame', function () {
+  $(document).one('click', '#btnRestartGame', function (e) {
+    event.stopImmediatePropagation
     $(document).trigger('startMulti');
   });
+}
