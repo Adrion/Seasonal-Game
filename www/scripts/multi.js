@@ -20,8 +20,7 @@ function multiInit() {
   socket.on('getUsers', function (users) {
     users.forEach(function (opponentDatas, index, array) {
       //on verifie que le user n'est pas deja affiché :
-      console.log(!$('#' + opponentDatas.id + '')[0]);
-      if (!$('#' + opponentDatas.id + '')) {
+      if (!$('#' + opponentDatas.id + '')[0]) {
         $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
         $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
       }
@@ -31,7 +30,7 @@ function multiInit() {
   //on ecoute l'arrivé d'un autre joueur.
   socket.on('userConnected', function (opponentDatas) {
     //on verifie que le user n'est pas deja affiché :
-    if (!$('#' + opponentDatas.id + '')) {
+    if (!$('#' + opponentDatas.id + '')[0]) {
       $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
       $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
     }
