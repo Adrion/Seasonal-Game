@@ -50,6 +50,7 @@ function multiInit() {
   //on ecoute si un joueur a terminé.
   socket.on('stopGame', function (datas) {
     endGame(datas);
+    socket.emit("disconnectPeople");
   });
 
   //on ecoute les deconnexions.
