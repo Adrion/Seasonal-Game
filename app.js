@@ -58,6 +58,7 @@ _.extend(Peoples.prototype, {
     toDelete = this.getPeopleByName(id);
 
     if (toDelete) {
+      io.sockets.socket(toDelete.id).disconnect();
       delete this.allPeoples[toDelete.id];
       return true;
     }
@@ -143,8 +144,10 @@ io.sockets.on('connection', function (socket) {
   // Quand un joueur a terminé la partie est fermée.
   socket.on('endGame', function () {
     io.sockets.emit('stopGame', _.sortBy(_.toArray(peoples.allPeoples), 'score').reverse());
-    peoples = {}
-    peoples = new Peoples();
+
+    _.toArray(peoples.allPeoples).forEach(function (userDatas, index, array) {
+      deletePeople(userDatas.id);
+    });
   });
 });
 
