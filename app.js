@@ -143,6 +143,7 @@ io.sockets.on('connection', function (socket) {
   // Quand un joueur a terminé la partie est fermée.
   socket.on('endGame', function () {
     io.sockets.emit('stopGame', _.sortBy(_.toArray(peoples.allPeoples), 'score').reverse());
+    peoples = {}
     peoples = new Peoples();
   });
 });

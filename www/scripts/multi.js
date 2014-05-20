@@ -51,6 +51,7 @@ function multiInit() {
   //on ecoute si la salle est pleine.
   socket.on('roomFull', function () {
     wrapper.html("sorry the room is full.");
+    wrapper.append("<button id='btnMenu'>Menu</button>");
     wrapper.show();
   });
 
