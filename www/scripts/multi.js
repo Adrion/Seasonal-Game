@@ -3,12 +3,12 @@
 function multiInit() {
   var zindex = 50,
     score = 0,
-    wrapper = $('#wrapper');
+    wrapper = $('#wrapper')[0],
 
-  //SOCKET IO
-  // On demande le pseudo de l'utilisateur
-  socket = io.connect("seasonal-game.herokuapp.com"),
-  pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
+    //SOCKET IO
+    // On demande le pseudo de l'utilisateur
+    socket = io.connect("seasonal-game.herokuapp.com"),
+    pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
 
   // On se connecte au serveur
   $('#scores').prepend("<div class='pseudo'>" + pseudo + "</div>");
