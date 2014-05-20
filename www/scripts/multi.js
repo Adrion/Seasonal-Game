@@ -19,15 +19,21 @@ function multiInit() {
   // On recupere le nom de l'adversaires (si il est deja connecté)
   socket.on('getUsers', function (users) {
     users.forEach(function (opponentDatas, index, array) {
-      $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
-      $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
+      //on verifie que le user n'est pas deja affiché :
+      if (!$('#' + opponentDatas.id + '')) {
+        $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
+        $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
+      }
     });
   });
 
   //on ecoute l'arrivé d'un autre joueur.
   socket.on('userConnected', function (opponentDatas) {
-    $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
-    $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
+    //on verifie que le user n'est pas deja affiché :
+    if (!$('#' + opponentDatas.id + '')) {
+      $('#scores').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
+      $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
+    }
   });
 
   //on ecoute le depart de la partie.
