@@ -20,6 +20,10 @@ table{
     border-spacing:0;
 }
 
+#wrapper{
+    color: white;
+}
+
 #topbar{
     position: fixed;
     width: 100%;

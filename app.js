@@ -93,8 +93,12 @@ io.sockets.on('connection', function (socket) {
   // On enregistre le nouveau joueur dans la partie.
   socket.on('register', function (pseudo) {
 
+    //On regarde si la salle est pleine.
+    if (_.toArray(peoples.allPeoples).length === roomSlots) {
+      socket.emit('roomFull');
+    }
+
     //On envoit la liste des joueurs connectés
-    //socket.emit('getUsers', users);
     console.log(_.toArray(peoples.allPeoples));
     socket.emit("getUsers", _.toArray(peoples.allPeoples));
 

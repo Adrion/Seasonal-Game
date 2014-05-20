@@ -3,11 +3,12 @@
 function multiInit() {
   var zindex = 50,
     score = 0,
+    wrapper = $('#wrapper');
 
-    //SOCKET IO
-    // On demande le pseudo de l'utilisateur
-    socket = io.connect("seasonal-game.herokuapp.com"),
-    pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
+  //SOCKET IO
+  // On demande le pseudo de l'utilisateur
+  socket = io.connect("seasonal-game.herokuapp.com"),
+  pseudo = prompt('Votre pseudo ?') || 'Utilisateur';
 
   // On se connecte au serveur
   $('#scores').prepend("<div class='pseudo'>" + pseudo + "</div>");
@@ -31,7 +32,7 @@ function multiInit() {
 
   //on ecoute le depart de la partie.
   socket.on('usersReady', function () {
-    $('#wrapper').hide();
+    wrapper.hide();
   });
 
   //on ecoute les actions de l'adversaires (refreshScore)
@@ -43,6 +44,14 @@ function multiInit() {
   //on ecoute si un joueur a terminé.
   socket.on('stopGame', function (datas) {
     endGame(datas);
+  });
+
+  //on ecoute les deconnexions.
+
+  //on ecoute si la salle est pleine.
+  socket.on('roomFull', function () {
+    wrapper.html("sorry the room is full.");
+    wrapper.show();
   });
 
   // Create your interaction code here
