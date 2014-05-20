@@ -54,8 +54,9 @@ _.extend(Peoples.prototype, {
   },
 
   deletePeople: function (id) {
-
-    toDelete = this.getPeopleByName(id);
+    console.log(id);
+    toDelete = this.getPeopleByName(socket.id)[0] || false;
+    console.log(toDelete);
 
     if (toDelete) {
       io.sockets.socket(toDelete.id).disconnect();
