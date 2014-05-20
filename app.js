@@ -101,26 +101,26 @@ io.sockets.on('connection', function (socket) {
     //On regarde si la salle est pleine.
     if (_.toArray(peoples.allPeoples).length === roomSlots) {
       socket.emit('roomFull');
-    }
+    } else {
+      //On envoit la liste des joueurs connectés
+      console.log(_.toArray(peoples.allPeoples));
+      socket.emit("getUsers", _.toArray(peoples.allPeoples));
 
-    //On envoit la liste des joueurs connectés
-    console.log(_.toArray(peoples.allPeoples));
-    socket.emit("getUsers", _.toArray(peoples.allPeoples));
+      //On enregistre le nouveau joueur dans la liste.
+      peoples.addPeople({
+        id: socket.id,
+        name: pseudo,
+        score: 0
+      });
 
-    //On enregistre le nouveau joueur dans la liste.
-    peoples.addPeople({
-      id: socket.id,
-      name: pseudo,
-      score: 0
-    });
+      // On previent sa connexion à l'adversaire.
+      socket.broadcast.emit('userConnected', peoples.getPeopleByName(socket.id)[0]);
+      console.log(_.toArray(peoples.allPeoples).length);
 
-    // On previent sa connexion à l'adversaire.
-    socket.broadcast.emit('userConnected', peoples.getPeopleByName(socket.id)[0]);
-    console.log(_.toArray(peoples.allPeoples).length);
-
-    //Si le nombre de joueur requis est atteint on lance la partie.
-    if (_.toArray(peoples.allPeoples).length === roomSlots) {
-      io.sockets.emit('usersReady');
+      //Si le nombre de joueur requis est atteint on lance la partie.
+      if (_.toArray(peoples.allPeoples).length === roomSlots) {
+        io.sockets.emit('usersReady');
+      }
     }
   });
 
