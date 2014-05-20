@@ -131,10 +131,6 @@
 					$("#pinboard").html($('#multi-game-template').html());
 					createCards(multiInit);
 				});
-				$(document).on('restartMulti', function(e){
-					$("#pinboard").html($('#multi-game-template').html());
-					createCards(multiRestart);
-				});
 
 				//Create Cards with datas
 				function createCards(gameMode){

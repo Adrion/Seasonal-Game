@@ -1,11 +1,6 @@
 'use strict';
 
-function multiRestart() {
-  var restart = true;
-  multiInit(restart);
-}
-
-function multiInit(restart) {
+function multiInit() {
   var zindex = 50,
     score = 0,
     wrapper = $('#wrapper'),
@@ -13,7 +8,7 @@ function multiInit(restart) {
 
   //SOCKET IO
   // On demande le pseudo de l'utilisateur
-  if (restart) {
+  if (socket) {
     socket.socket.reconnect();
   } else {
     socket = io.connect("seasonal-game.herokuapp.com/");
@@ -188,7 +183,7 @@ function multiInit(restart) {
       $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
     });
   }
-  $(document).one('click', '#btnRestartGame', function () {
-    $(document).trigger('restartMulti');
-  });
 }
+  $(document).one('click', '#btnRestartGame', function () {
+    $(document).trigger('startMulti');
+  });
