@@ -85,6 +85,11 @@ io = io.listen(server);
 // Quand une personne se connecte au serveur
 io.sockets.on('connection', function (socket) {
 
+  //On regarde si la salle est pleine.
+  if (_.toArray(peoples.allPeoples).length === roomSlots) {
+    socket.emit('roomFull');
+  }
+
   //Tant que le nombre de joueur n'est pas atteint on accepte les connexions.
   socket.on('disconnect', function () {
     console.log('Got disconnect!' + socket.id);
