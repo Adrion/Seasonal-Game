@@ -3,7 +3,7 @@
 function multiInit() {
   var zindex = 50,
     score = 0,
-    wrapper = $('#wrapper')[0],
+    wrapper = $('#wrapper'),
 
     //SOCKET IO
     // On demande le pseudo de l'utilisateur
