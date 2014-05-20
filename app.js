@@ -55,7 +55,7 @@ _.extend(Peoples.prototype, {
 
   deletePeople: function (id) {
     console.log(id);
-    toDelete = this.getPeopleByName(id)[0] || false;
+    var toDelete = this.getPeopleByName(id)[0] || false;
     console.log(toDelete);
 
     if (toDelete) {

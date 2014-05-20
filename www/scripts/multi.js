@@ -1,14 +1,23 @@
 'use strict';
 
-function multiInit() {
+function multiRestart() {
+  var restart = true;
+  multiInit(restart);
+}
+
+function multiInit(restart) {
   var zindex = 50,
     score = 0,
     wrapper = $('#wrapper'),
-
-    //SOCKET IO
-    // On demande le pseudo de l'utilisateur
-    socket = io.connect("seasonal-game.herokuapp.com"),
     pseudo = prompt('Votre pseudo ?') || $('#btnMenu').trigger("click");
+
+  //SOCKET IO
+  // On demande le pseudo de l'utilisateur
+  if (restart) {
+    socket.socket.reconnect();
+  } else {
+    socket = io.connect();
+  }
 
   // On se connecte au serveur
   $('#scores').prepend("<div class='pseudo'>" + pseudo + "</div>");
@@ -178,9 +187,8 @@ function multiInit() {
       $('#classement').append('<div class="score" id="' + opponentDatas.id + '">' + opponentDatas.score + '</div>');
       $('#' + opponentDatas.id + '').prepend('<div class="pseudo" id="scoreOpponent">' + opponentDatas.name + '</div>');
     });
-
-    $(document).on('click', '#btnRestartGame', function () {
-      $(document).trigger('startMulti');
-    });
   }
+  $(document).one('click', '#btnRestartGame', function () {
+    $(document).trigger('restartMulti');
+  });
 }
