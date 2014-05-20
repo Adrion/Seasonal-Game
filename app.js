@@ -148,7 +148,7 @@ io.sockets.on('connection', function (socket) {
 
   //Quand un joueur se deconnecte.
   socket.on('disconnectPeople', function () {
-    deletePeople(socket.id);
+    peoples.deletePeople(socket.id);
   });
 });
 
