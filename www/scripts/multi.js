@@ -16,7 +16,7 @@ function multiInit(restart) {
   if (restart) {
     socket.socket.reconnect();
   } else {
-    socket = io.connect('http: //seasonal-game.herokuapp.com/');
+    socket = io.connect("seasonal-game.herokuapp.com/");
   }
 
   // On se connecte au serveur
