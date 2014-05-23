@@ -26,63 +26,31 @@ function soloTimerInit() {
       msTransform: "rotate(" + rotation + "deg)",
       transform: "rotate(" + rotation + "deg)"
     });
-  }).draggable({
-
+  }).pep({
     start: function () {
       zindex = zindex + 1;
       $(this).css({
         zIndex: zindex
       });
     },
-    stop: function () {
-      var rotation = Math.floor(Math.random() * 15);
-      if (Math.floor(Math.random() * 11) > 5) {
-        rotation = rotation * -1;
+    constrainTo: [0, 0, 0, 0],
+    useCSSTranslation: false,
+    droppable: $("#printemps, #ete,#hiver,#automne"),
+    elementsWithInteraction: $("#spring, #summer,#winter,#autumn"),
+    stop: handleDrop,
+    rest: handleDrop
+  });
+
+  function handleDrop(e, obj) {
+    if (obj.activeDropRegions[0]) {
+      var dropTargetId = obj.activeDropRegions[0][0].id,
+        dragElClass = obj.$el[0].classList[1];
+      if (dropTargetId === dragElClass) {
+        obj.$el[0].remove();
+        checkStillDiv();
       }
-      $(this).data("rotation", rotation);
-      $(this).css({
-        webkitTransform: "rotate(" + rotation + "deg)",
-        MozTransform: "rotate(" + rotation + "deg)",
-        msTransform: "rotate(" + rotation + "deg)",
-        transform: "rotate(" + rotation + "deg)"
-      });
-    },
-
-    containment: "#pinboard",
-    scroll: false
-  });
-
-  $("#spring").droppable({
-    accept: ".printemps",
-    drop: function (event, ui) {
-      ui.draggable.remove();
-      checkStillDiv();
     }
-  });
-
-  $("#summer").droppable({
-    accept: ".ete",
-    drop: function (event, ui) {
-      ui.draggable.remove();
-      checkStillDiv();
-    }
-  });
-
-  $("#autumn").droppable({
-    accept: ".automne",
-    drop: function (event, ui) {
-      ui.draggable.remove();
-      checkStillDiv();
-    }
-  });
-
-  $("#winter").droppable({
-    accept: ".hiver",
-    drop: function (event, ui) {
-      ui.draggable.remove();
-      checkStillDiv();
-    }
-  });
+  }
 
   //Init Chrono
   chronoStart();

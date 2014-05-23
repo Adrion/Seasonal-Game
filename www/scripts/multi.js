@@ -88,76 +88,33 @@ function multiInit() {
       msTransform: "rotate(" + rotation + "deg)",
       transform: "rotate(" + rotation + "deg)"
     });
-  }).draggable({
+  }).pep({
     start: function () {
       zindex = zindex + 1;
       $(this).css({
         zIndex: zindex
       });
     },
-    stop: function () {
-      var rotation = Math.floor(Math.random() * 15);
-      if (Math.floor(Math.random() * 11) > 5) {
-        rotation = rotation * -1;
-      }
-      $(this).data("rotation", rotation);
-      $(this).css({
-        webkitTransform: "rotate(" + rotation + "deg)",
-        MozTransform: "rotate(" + rotation + "deg)",
-        msTransform: "rotate(" + rotation + "deg)",
-        transform: "rotate(" + rotation + "deg)"
-      });
-    },
-    containment: "#pinboard"
+    constrainTo: [0, 0, 0, 0],
+    useCSSTranslation: false,
+    droppable: $("#printemps, #ete,#hiver,#automne"),
+    elementsWithInteraction: $("#spring, #summer,#winter,#autumn"),
+    stop: handleDrop
   });
 
-  $("#spring").droppable({
-    drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === 'printemps') {
+  function handleDrop(e, obj) {
+    if (obj.activeDropRegions[0]) {
+      var dropTargetId = obj.activeDropRegions[0][0].id,
+        dragElClass = obj.$el[0].classList[1];
+      if (dropTargetId === dragElClass) {
         getpoint(5);
       } else {
         getpoint(-3);
       }
-      ui.draggable.remove();
+      obj.$el[0].remove();
       checkStillDiv();
     }
-  });
-
-  $("#summer").droppable({
-    drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === 'ete') {
-        getpoint(5);
-      } else {
-        getpoint(-3);
-      }
-      ui.draggable.remove();
-      checkStillDiv();
-    }
-  });
-
-  $("#autumn").droppable({
-    drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === 'automne') {
-        getpoint(5);
-      } else {
-        getpoint(-3);
-      }
-      ui.draggable.remove();
-      checkStillDiv();
-    }
-  });
-
-  $("#winter").droppable({
-    drop: function (event, ui) {
-      if (ui.draggable[0].classList[1] === 'hiver') {
-        getpoint(5);
-      } else {
-        getpoint(-3);
-      }
-      ui.draggable.remove();
-      checkStillDiv();
-    }
-  });
+  }
 
   function getpoint(points) {
     score += points;
