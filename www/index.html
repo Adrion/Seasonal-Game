@@ -5,10 +5,10 @@
 		<link rel="stylesheet" href="css/stylePolaroid.css"/>
         <link rel="stylesheet" href="css/styles.css"/>
         <link rel='stylesheet' href='css/typicons.min.css'/>
-        <script src="http://seasonal-game.herokuapp.com/socket.io/socket.io.js"></script>
 		<script src="scripts/js/jquery-1.9.1.js"></script>
 		<script src="scripts/js/jquery-ui-1.10.2.custom.js"></script>
         <script src="scripts/js/jquery-ui.js"></script>
+        <script src="scripts/js/jquery.pep.min.js"></script>
         <script src="scripts/js/lodash.js"></script>
 		<script src="scripts/points.js"></script>
 		<script src="scripts/soloTimer.js"></script>
@@ -26,12 +26,12 @@
 
             <table>
                 <tr>
-                    <td id="spring"><span class="typcn typcn-feather"><span></td>
-                    <td id="summer"><span class="typcn typcn-weather-sunny"><span></td>
+                    <td id="printemps"><span class="typcn typcn-feather"><span></td>
+                    <td id="ete"><span class="typcn typcn-weather-sunny"><span></td>
                 </tr>
                 <tr>
-                    <td id="autumn"><span class="typcn typcn-weather-downpour"><span></td>
-                    <td id="winter"><span class="typcn typcn-weather-snow"><span></td>
+                    <td id="automne"><span class="typcn typcn-weather-downpour"><span></td>
+                    <td id="hiver"><span class="typcn typcn-weather-snow"><span></td>
                 </tr>
             </table>
 				</script>
@@ -46,12 +46,12 @@
 			
             <table>
                 <tr>
-                    <td id="spring"><span class="typcn typcn-feather"><span></td>
-                    <td id="summer"><span class="typcn typcn-weather-sunny"><span></td>
+                    <td id="printemps"><span class="typcn typcn-feather"><span></td>
+                    <td id="ete"><span class="typcn typcn-weather-sunny"><span></td>
                 </tr>
                 <tr>
-                    <td id="autumn"><span class="typcn typcn-weather-downpour"><span></td>
-                    <td id="winter"><span class="typcn typcn-weather-snow"><span></td>
+                    <td id="automne"><span class="typcn typcn-weather-downpour"><span></td>
+                    <td id="hiver"><span class="typcn typcn-weather-snow"><span></td>
                 </tr>
             </table>
 					
@@ -67,12 +67,12 @@
             </div>
             <table>
                 <tr>
-                    <td id="spring"><span class="typcn typcn-feather"><span></td>
-                    <td id="summer"><span class="typcn typcn-weather-sunny"><span></td>
+                    <td id="printemps"><span class="typcn typcn-feather"><span></td>
+                    <td id="ete"><span class="typcn typcn-weather-sunny"><span></td>
                 </tr>
                 <tr>
-                    <td id="autumn"><span class="typcn typcn-weather-downpour"><span></td>
-                    <td id="winter"><span class="typcn typcn-weather-snow"><span></td>
+                    <td id="automne"><span class="typcn typcn-weather-downpour"><span></td>
+                    <td id="hiver"><span class="typcn typcn-weather-snow"><span></td>
                 </tr>
             </table>
 				</script>			
@@ -116,7 +116,9 @@
 				});
 
 				$(document).on('click', '#btnDuelGame', function () {
-					$(document).trigger('startMulti');
+					$.getScript( "http://seasonal-game.herokuapp.com/socket.io/socket.io.js",function(){
+						$(document).trigger('startMulti');
+					});
 				});
 
 				$(document).on('startPoints', function(e){
@@ -154,7 +156,28 @@
 						}).appendTo( "table" );
 
 					}).done(function() {
+						//Listen touch events
+						document.getElementsByTagName('table')[0].addEventListener("touchstart", touchHandler, true);
+					    document.getElementsByTagName('table')[0].addEventListener("touchmove", touchHandler, true);
+					    document.getElementsByTagName('table')[0].addEventListener("touchend", touchHandler, true);
+					    document.getElementsByTagName('table')[0].addEventListener("touchcancel", touchHandler, true);
 
+						function touchHandler(event) {
+						    var touch = event.changedTouches[0];
+
+						    var simulatedEvent = document.createEvent("MouseEvent");
+						        simulatedEvent.initMouseEvent({
+						        touchstart: "mousedown",
+						        touchmove: "mousemove",
+						        touchend: "mouseup"
+						    }[event.type], true, true, window, 1,
+						        touch.screenX, touch.screenY,
+						        touch.clientX, touch.clientY, false,
+						        false, false, false, 0, null);
+
+						    touch.target.dispatchEvent(simulatedEvent);
+						    event.preventDefault();
+						}
 					    //on lance la partie demandée :
 					    gameMode();
 					  })
@@ -196,28 +219,6 @@
 				    });  
 				}
 
-				//Listen touch events
-				document.addEventListener("touchstart", touchHandler, true);
-			    document.addEventListener("touchmove", touchHandler, true);
-			    document.addEventListener("touchend", touchHandler, true);
-			    document.addEventListener("touchcancel", touchHandler, true);
-
-				function touchHandler(event) {
-				    var touch = event.changedTouches[0];
-
-				    var simulatedEvent = document.createEvent("MouseEvent");
-				        simulatedEvent.initMouseEvent({
-				        touchstart: "mousedown",
-				        touchmove: "mousemove",
-				        touchend: "mouseup"
-				    }[event.type], true, true, window, 1,
-				        touch.screenX, touch.screenY,
-				        touch.clientX, touch.clientY, false,
-				        false, false, false, 0, null);
-
-				    touch.target.dispatchEvent(simulatedEvent);
-				    event.preventDefault();
-				}
 			});
 		</script>
 		
