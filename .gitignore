@@ -1,3 +1,6 @@
 # npm folder
 /node_modules/
 Seasonal.sublime-workspace
+.jsbeautifyrc
+.jshintrc
+Procfile
